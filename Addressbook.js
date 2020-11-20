@@ -116,16 +116,44 @@ class Contact
     // ToString method for displaying contacts
     toString() 
     {
-        return "First Name : " + this.firstName + "\nLast Name  : " + this.lastName + "\nAddress : " + this.address +
-            "\nCity  : " + this.city + "\nState : " + this.state + "\nZip   : " + this.zip + "\nPhone : " + this.phoneNumber + "\nEmail : " + this.email;
+        return "Name: " + this.firstName + " " + this.lastName + "\t Address: " + this.address + ", " + this.city
+            + ", " + this.state + " - " + this.zip + "\t Phone Number: " + this.phoneNumber + "    Email ID: " + this.email;
     }
 }
-try
+
+let AddressBook = [];
+
+function FindContact(firstName,lastName)
 {
-    let contact = new Contact("Tony", "Stark", "StarkTower", "Mumbai", "Maharashtra", "101 001", "91 9787224534", "ironman@gmail.com");
-    console.log(contact.toString());
+    if (AddressBook.find(person => person.firstName == firstName && person.lastName == lastName))
+        return true;
 }
-catch(e)
+
+function AddContact(firstName, lastName, address, city, state, zip, phoneNumber, email) 
 {
-    console.error(e);
+    try 
+    {
+        let newcontact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
+        if (FindContact(firstName, lastName))
+            throw "Contact '" + firstName + " " + lastName + "' already exists";
+        else 
+            AddressBook.push(newcontact);
+    }
+    catch (e) 
+    {
+        console.error(e);
+    }
 }
+
+// Adding contacts to AddressBook
+console.log("---------------Adding contact-----------------");
+AddContact("Tony", "Stark", "StarkTower", "Mumbai", "Maharashtra", "101 001", "91 8987224534", "ironman@gmail.com");
+AddContact("Steve", "Rogers", "TimesSquare", "Hyderabad", "Telangana", "114 224", "91 9876778434", "captainAmerica@yahoo.com");
+AddContact("Bruce", "Banner", "Vandalia", "Chennai", "Tamilnadu", "454 241", "91 9403425611", "incredibleHulk@gmail.com");
+AddContact("Peter", "Parker", "Queens", "Bangalore", "Karnataka", "122 440", "91 7013456376", "spiderman@yahoo.com");
+AddContact("Pepper", "Potts", "StarkTower", "Mumbai", "Maharashtra", "101 001", "91 6300924534", "pepper@stark.co.in");
+AddContact("Thor", "Odinson", "Asgard", "Hyderabad", "Telangana", "114 224", "91 9949278434", "thor@yahoo.com");
+AddContact("Stephen", "Strange", "AkshayaNagar","Warangal", "Telangana", "534 224", "91 7690778434", "drStrange@rediffmail.com");
+
+// Printing AddressBook
+AddressBook.forEach(contact => console.log(contact.toString()));
