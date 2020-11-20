@@ -225,9 +225,9 @@ console.log("Number of contacts in AddressBook : ".bold() + contactCount);
 console.log('-'.repeat(process.stdout.columns));
 
 // Search person in City or State
-function SearchPersonInCity(FirstName,LastName,place)
+function SearchPersonInCityOrState(FirstName,LastName,place)
 {
-    let filteredArray = AddressBook.filter(p => p.firstName == FirstName && p.lastName == LastName && p.city == place);
+    let filteredArray = AddressBook.filter(p => p.firstName == FirstName && p.lastName == LastName && (p.city == place || p.state == place));
     console.log(("Searching contact of " + FirstName + " " + LastName + " in " + place + " : ").bold());
     try 
     {
@@ -240,4 +240,27 @@ function SearchPersonInCity(FirstName,LastName,place)
         console.log(stringformat.red("Error : ") + stringformat.red(e));
     }
 }
-SearchPersonInCity("Steve", "Rogers", "Hyderabad");
+SearchPersonInCityOrState("Steve", "Rogers", "Hyderabad");
+SearchPersonInCityOrState("Bruce", "Banner", "Tamilnadu");
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// View contacts by City or State 
+function ViewContactsCityOrState(place)
+{
+    let filteredArray = AddressBook.filter(p => p.city == place || p.state == place);
+    console.log(("Viewing contacts in " + place + " : ").bold());
+    try 
+    {
+        if (filteredArray.length == 0)
+            throw "No contacts " + " in " + place;
+        filteredArray.forEach(p => console.log(p.toString()));
+    }
+    catch (e) 
+    {
+        console.log(stringformat.red("Error : ") + stringformat.red(e));
+    }
+}
+ViewContactsCityOrState("Mumbai");
+ViewContactsCityOrState("Telangana");
