@@ -142,7 +142,7 @@ function AddContact(firstName, lastName, address, city, state, zip, phoneNumber,
         else 
         {
             AddressBook.push(newcontact);
-            console.log("Contact of " + firstName + " " + lastName + " added to AddressBook successfully!")
+            console.log("Contact of " + firstName + " " + lastName + " added to AddressBook successfully!");
         }
     }
     catch (e) 
