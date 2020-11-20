@@ -284,3 +284,13 @@ console.log('-'.repeat(process.stdout.columns));
 console.log("Count contacts by State : ".bold());
 CountByPlace("Maharashtra");
 CountByPlace("Telangana");
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// Sort contacts alphabetically by name
+let sortedByName = AddressBook.sort((c1,c2) => c1.firstName < c2.firstName ? -1 : c1.firstName > c2.firstName ? 1 : 0);
+
+// Printing  Name sorted AddressBook
+console.log("Sorting Address Book by name : ".bold());
+sortedByName.forEach(contact => console.log(contact.toString()));
