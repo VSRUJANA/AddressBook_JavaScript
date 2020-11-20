@@ -111,7 +111,6 @@ class Contact
         this.phoneNumber = params[6];
         this.email = params[7];
     }
-
     
     // ToString method for displaying contacts
     toString() 
@@ -121,14 +120,17 @@ class Contact
     }
 }
 
+// Create AddressBook array
 let AddressBook = [];
 
+// Check if given contact exists in Address book
 function FindContact(firstName,lastName)
 {
     if (AddressBook.find(person => person.firstName == firstName && person.lastName == lastName))
         return true;
 }
 
+// Function to add new contact to AddressBook
 function AddContact(firstName, lastName, address, city, state, zip, phoneNumber, email) 
 {
     try 
@@ -145,8 +147,10 @@ function AddContact(firstName, lastName, address, city, state, zip, phoneNumber,
     }
 }
 
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
 // Adding contacts to AddressBook
-console.log("---------------Adding contact-----------------");
 AddContact("Tony", "Stark", "StarkTower", "Mumbai", "Maharashtra", "101 001", "91 8987224534", "ironman@gmail.com");
 AddContact("Steve", "Rogers", "TimesSquare", "Hyderabad", "Telangana", "114 224", "91 9876778434", "captainAmerica@yahoo.com");
 AddContact("Bruce", "Banner", "Vandalia", "Chennai", "Tamilnadu", "454 241", "91 9403425611", "incredibleHulk@gmail.com");
@@ -156,4 +160,6 @@ AddContact("Thor", "Odinson", "Asgard", "Hyderabad", "Telangana", "114 224", "91
 AddContact("Stephen", "Strange", "AkshayaNagar","Warangal", "Telangana", "534 224", "91 7690778434", "drStrange@rediffmail.com");
 
 // Printing AddressBook
+var strings = require('node-strings');
+console.log("Address Book : ".bold());
 AddressBook.forEach(contact => console.log(contact.toString()));
