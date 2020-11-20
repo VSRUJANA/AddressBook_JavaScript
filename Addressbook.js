@@ -264,3 +264,23 @@ function ViewContactsCityOrState(place)
 }
 ViewContactsCityOrState("Mumbai");
 ViewContactsCityOrState("Telangana");
+
+function CountByPlace(place)
+{
+    console.log("Number of contacts in "+ place + " : " + AddressBook.filter(contact => (contact.city == place || contact.state == place)).length);
+}
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// Count contacts by city
+console.log("Count contacts by City : ".bold());
+CountByPlace("Hyderabad");
+CountByPlace("Mumbai");
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+//Count contacts by state
+console.log("Count contacts by State : ".bold());
+CountByPlace("Maharashtra");
+CountByPlace("Telangana");
