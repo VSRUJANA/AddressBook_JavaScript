@@ -148,7 +148,7 @@ function AddContact(firstName, lastName, address, city, state, zip, phoneNumber,
     catch (e) 
     {
         console.log("Contact of " + firstName + " " + lastName + " cannot be added");
-        console.error("Error : ".red() + e.red());
+        console.log("Error : ".red() + e.red());
     }
 }
 
@@ -181,7 +181,7 @@ try
 catch (e) 
 {
     console.log("Contact can't be edited!");
-    console.error(stringformat.red("Error : ") + stringformat.red(e));
+    console.log(stringformat.red("Error : ") + stringformat.red(e));
 }
 
 
@@ -204,7 +204,7 @@ try
 catch (e)
 {
     console.log("Contact can't be deleted!");
-    console.error(stringformat.red("Error : ") + stringformat.red(e));
+    console.log(stringformat.red("Error : ") + stringformat.red(e));
 }
 
 // print custom horizontal line
@@ -220,3 +220,24 @@ console.log('-'.repeat(process.stdout.columns));
 // Find number of contacts in AddressBook
 let contactCount = AddressBook.reduce((count) => count + 1, 0);
 console.log("Number of contacts in AddressBook : ".bold() + contactCount);
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// Search person in City or State
+function SearchPersonInCity(FirstName,LastName,place)
+{
+    let filteredArray = AddressBook.filter(p => p.firstName == FirstName && p.lastName == LastName && p.city == place);
+    console.log(("Searching contact of " + FirstName + " " + LastName + " in " + place + " : ").bold());
+    try 
+    {
+        if (filteredArray.length == 0)
+            throw "No contact for " + FirstName + " " + LastName + " in " + place;
+        filteredArray.forEach(p => console.log(p.toString()));
+    }
+    catch (e) 
+    {
+        console.log(stringformat.red("Error : ") + stringformat.red(e));
+    }
+}
+SearchPersonInCity("Steve", "Rogers", "Hyderabad");
