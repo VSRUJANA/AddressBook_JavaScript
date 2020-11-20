@@ -213,3 +213,10 @@ console.log('-'.repeat(process.stdout.columns));
 // Printing AddressBook
 console.log("Address Book : ".bold());
 AddressBook.forEach(contact => console.log(contact.toString()));
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// Find number of contacts in AddressBook
+let contactCount = AddressBook.reduce((count) => count + 1, 0);
+console.log("Number of contacts in AddressBook : ".bold() + contactCount);
