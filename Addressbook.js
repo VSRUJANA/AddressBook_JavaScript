@@ -111,7 +111,6 @@ class Contact
         this.phoneNumber = params[6];
         this.email = params[7];
     }
-
     
     // ToString method for displaying contacts
     toString() 
@@ -121,14 +120,19 @@ class Contact
     }
 }
 
+// Create AddressBook array
 let AddressBook = [];
 
+var strings = require('node-strings');
+
+// Check if given contact exists in Address book
 function FindContact(firstName,lastName)
 {
     if (AddressBook.find(person => person.firstName == firstName && person.lastName == lastName))
         return true;
 }
 
+// Function to add new contact to AddressBook
 function AddContact(firstName, lastName, address, city, state, zip, phoneNumber, email) 
 {
     try 
@@ -137,16 +141,23 @@ function AddContact(firstName, lastName, address, city, state, zip, phoneNumber,
         if (FindContact(firstName, lastName))
             throw "Contact '" + firstName + " " + lastName + "' already exists";
         else 
+        {
             AddressBook.push(newcontact);
+            console.log("Contact of " + firstName + " " + lastName + " added to AddressBook successfully!")
+        }
     }
     catch (e) 
     {
-        console.error(e);
+        console.log("Contact of " + firstName + " " + lastName + " cannot be added");
+        console.error("Error : ".red() + e.red());
     }
 }
 
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
 // Adding contacts to AddressBook
-console.log("---------------Adding contact-----------------");
+console.log("Adding new contacts to AddressBook : ".bold());
 AddContact("Tony", "Stark", "StarkTower", "Mumbai", "Maharashtra", "101 001", "91 8987224534", "ironman@gmail.com");
 AddContact("Steve", "Rogers", "TimesSquare", "Hyderabad", "Telangana", "114 224", "91 9876778434", "captainAmerica@yahoo.com");
 AddContact("Bruce", "Banner", "Vandalia", "Chennai", "Tamilnadu", "454 241", "91 9403425611", "incredibleHulk@gmail.com");
@@ -155,5 +166,28 @@ AddContact("Pepper", "Potts", "StarkTower", "Mumbai", "Maharashtra", "101 001", 
 AddContact("Thor", "Odinson", "Asgard", "Hyderabad", "Telangana", "114 224", "91 9949278434", "thor@yahoo.com");
 AddContact("Stephen", "Strange", "AkshayaNagar","Warangal", "Telangana", "534 224", "91 7690778434", "drStrange@rediffmail.com");
 
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// Edit contact in AddressBook
+try
+{
+    console.log("Editing existing contact in AddressBook : ".bold());
+    let contactIndex = AddressBook.findIndex(c => c.firstName == "Bruce" && c.lastName == "Banner");
+    if (contactIndex == -1)
+        throw "No such contact in the AddressBook";
+    AddressBook[contactIndex].phoneNumber = "91 8789877892";
+    console.log("Contact of " + AddressBook[contactIndex].firstName + " " + AddressBook[contactIndex].lastName + " edited successfully!");
+}
+catch (e) 
+{
+    console.log("Contact can't be edited!");
+    console.error("Error : ".red()+e.red());
+}
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
 // Printing AddressBook
+console.log("Address Book : ".bold());
 AddressBook.forEach(contact => console.log(contact.toString()));
