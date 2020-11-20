@@ -123,13 +123,12 @@ class Contact
 // Create AddressBook array
 let AddressBook = [];
 
-var strings = require('node-strings');
+const stringformat = require('node-strings');
 
 // Check if given contact exists in Address book
 function FindContact(firstName,lastName)
 {
-    if (AddressBook.find(person => person.firstName == firstName && person.lastName == lastName))
-        return true;
+    return AddressBook.findIndex(person => person.firstName == firstName && person.lastName == lastName);
 }
 
 // Function to add new contact to AddressBook
@@ -138,7 +137,7 @@ function AddContact(firstName, lastName, address, city, state, zip, phoneNumber,
     try 
     {
         let newcontact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-        if (FindContact(firstName, lastName))
+        if (FindContact(firstName, lastName)!=-1)
             throw "Contact '" + firstName + " " + lastName + "' already exists";
         else 
         {
@@ -173,16 +172,39 @@ console.log('-'.repeat(process.stdout.columns));
 try
 {
     console.log("Editing existing contact in AddressBook : ".bold());
-    let contactIndex = AddressBook.findIndex(c => c.firstName == "Bruce" && c.lastName == "Banner");
+    let contactIndex = FindContact("Bruce","Banner");
     if (contactIndex == -1)
         throw "No such contact in the AddressBook";
-    AddressBook[contactIndex].phoneNumber = "91 8789877892";
+    AddressBook[contactIndex].email = "hulkNew@yahoo.com";
     console.log("Contact of " + AddressBook[contactIndex].firstName + " " + AddressBook[contactIndex].lastName + " edited successfully!");
 }
 catch (e) 
 {
     console.log("Contact can't be edited!");
-    console.error("Error : ".red()+e.red());
+    console.error(stringformat.red("Error : ") + stringformat.red(e));
+}
+
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// Delete contact in AddressBook
+try
+{    
+    console.log("Deleting contact from AddressBook : ".bold());
+    contactIndex = FindContact("Peter", "Parker");
+    if (contactIndex == -1)
+        throw "No such contact in the AddressBook";
+    else 
+    {
+        console.log("Contact of " + AddressBook[contactIndex].firstName + " " + AddressBook[contactIndex].lastName + " deleted successfully");    
+        AddressBook.splice(contactIndex, 1);
+    }
+}
+catch (e)
+{
+    console.log("Contact can't be deleted!");
+    console.error(stringformat.red("Error : ") + stringformat.red(e));
 }
 
 // print custom horizontal line
