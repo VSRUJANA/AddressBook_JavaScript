@@ -289,8 +289,34 @@ CountByPlace("Telangana");
 console.log('-'.repeat(process.stdout.columns));
 
 // Sort contacts alphabetically by name
-let sortedByName = AddressBook.sort((c1,c2) => c1.firstName < c2.firstName ? -1 : c1.firstName > c2.firstName ? 1 : 0);
-
+let sortByName = AddressBook.sort((c1,c2) => c1.firstName < c2.firstName ? -1 : c1.firstName > c2.firstName ? 1 : 0);
 // Printing  Name sorted AddressBook
 console.log("Sorting Address Book by name : ".bold());
-sortedByName.forEach(contact => console.log(contact.toString()));
+sortByName.forEach(contact => console.log(contact.toString()));
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// sort contacts by City
+let sortByCity = AddressBook.sort((c1,c2) => c1.city < c2.city ? -1 : c1.city > c2.city ? 1 : 0);
+// Printing  city sorted AddressBook
+console.log("Sorting Address Book by City : ".bold());
+sortByCity.forEach(contact => console.log(contact.toString()));
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// sort contacts by State
+let sortByState = AddressBook.sort((c1,c2) => c1.state < c2.state ? -1 : c1.state > c2.state ? 1 : 0);
+// Printing  State sorted AddressBook
+console.log("Sorting Address Book by State : ".bold());
+sortByState.forEach(contact => console.log(contact.toString()));
+
+// print custom horizontal line
+console.log('-'.repeat(process.stdout.columns));
+
+// sort contacts by ZipCode
+let sortByZip = AddressBook.sort((c1,c2) => c1.zip < c2.zip ? -1 : c1.zip > c2.zip ? 1 : 0);
+// Printing  Zipcode sorted AddressBook
+console.log("Sorting Address Book by ZipCode : ".bold());
+sortByZip.forEach(contact => console.log(contact.toString()));
